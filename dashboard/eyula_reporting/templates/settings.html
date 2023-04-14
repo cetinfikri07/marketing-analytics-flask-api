@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AdminKit</title>
+
+    <!-- AdminKit CSS file -->
+    <link href="../static/adminkit/dist/css/app.css" rel="stylesheet">
+        <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav id="sidebar" class="sidebar js-sidebar">
+            <div class="sidebar-content js-simplebar">
+                <a class="sidebar-brand" href="index.html">
+                    <span class="align-middle">Eyula Reporting Dashboard</span>
+                </a>
+
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">
+                        Platforms
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/meta">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Facebook</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="main">
+            <nav class="navbar navbar-expand navbar-light navbar-bg">
+                <a class="sidebar-toggle js-sidebar-toggle">
+                    <i class="hamburger align-self-center"></i>
+                </a>
+                <!-- Notifications dropdown -->
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav navbar-align">
+                        <li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
+								data-bs-toggle="dropdown">
+								<i class="align-middle" data-feather="settings"></i>
+							</a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
+								data-bs-toggle="dropdown">
+								<img src="../static/adminkit/static/img/avatars/avatar-fikri.jpg" class="avatar img-fluid rounded me-1"
+									alt="Charles Hall" /> <span class="text-dark"></span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="/settings"><i class="align-middle me-1"
+										data-feather="settings"></i>Register Account</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Log out</a>
+							</div>
+						</li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+                    <h1 class="h4 mb-3"><strong>Register Facebook Ad Account</strong></h1>
+                    <form>
+                        <div class="form-group">
+                            <label for="fbAccountId">Facebook Account ID</label>
+                            <input type="text" name="facebook_account_id" id="fbAccountId" class="form-control w-50">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateRange">Date Range</label>
+                            <input type="text" name="daterange" id="dateRange" class="form-control w-50">
+                        </div>
+                        <button class="btn btn-primary mt-3" id="registerBtn">Register</button>
+                    </form>
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+    <section class='loading'><img src='../static/images/svg/loading.svg' width='100' height='100'></section>
+    <!-- AdminKit JS file -->
+    <script src="../static/adminkit/dist/js/app.js"></script>
+    <script src="../static/js/settings.js"></script>
+</body>
+
+</html>
