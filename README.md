@@ -8,6 +8,8 @@ You'll need start two different Flask application which are located at ```dashbo
 1. **Clone the project**
 ```git clone https://github.com/cetinfikri07/marketing-analytics-flask-api.git```
 
+2. **Load ```meta.sql``` file into your MySQL server**
+
 
 
 
