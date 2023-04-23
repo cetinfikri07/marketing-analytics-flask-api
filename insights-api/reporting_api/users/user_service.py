@@ -68,9 +68,6 @@ class UserService:
         body = request.get_json()
         email = body.get('email')
         passwd = body.get('passwd')
-
-        print(body)
-
         if not body or not email or not passwd:
             return {'message':'Email and password is required','status':401}
 

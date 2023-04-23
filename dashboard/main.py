@@ -1,6 +1,6 @@
 import os
 from os import environ
-from eyula_reporting import app
+from reporting_dashboard import app
 
 if __name__ == '__main__':
     HOST = environ.get('SERVER_HOST', 'localhost')

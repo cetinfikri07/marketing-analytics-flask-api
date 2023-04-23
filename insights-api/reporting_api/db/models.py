@@ -1,9 +1,6 @@
 from sqlalchemy.orm import declarative_base,relationship
 from sqlalchemy import Column,Integer,String,Float,ForeignKey,PrimaryKeyConstraint
 from sqlalchemy.dialects.mysql import VARCHAR,MEDIUMINT,DATE,BIGINT,FLOAT,SMALLINT,BOOLEAN
-from sqlalchemy import select
-from sqlalchemy.orm import joinedload
-from reporting_api.db import session
 
 Base = declarative_base()
 
@@ -33,7 +30,6 @@ class Accounts(Base):
 
 class Campaigns(Base):
     __tablename__ = "campaigns"
-
     campaign_id = Column(VARCHAR(250),primary_key=True,nullable=False)
     account_id = Column(VARCHAR(250),ForeignKey("accounts.account_id"),nullable=False)
     campaign_name = Column(VARCHAR(45))

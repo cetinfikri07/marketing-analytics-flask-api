@@ -29,7 +29,6 @@ def register_account(current_user):
 @token_required
 def user_levels(current_user):
     result = meta_service.user_levels(request)
-
     return jsonify(result),200
 
 
