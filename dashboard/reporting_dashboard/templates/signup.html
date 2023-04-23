@@ -9,6 +9,7 @@
     <title>Sign In</title>
     <link href="../static/adminkit/dist/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -22,7 +23,18 @@
 								<div class="m-sm-4">
 									<div class="text-center">
 									</div>
+                                    <h5 class="card-title">Sign Up</h5>
 									<form id="login-form", method="POST">
+                                        <div class="mb-3">
+											<label class="form-label">First Name</label>
+											<input class="form-control form-control-lg" type="text" name="firstName"
+												placeholder="First Name" />
+										</div>
+                                        <div class="mb-3">
+											<label class="form-label">Last Name</label>
+											<input class="form-control form-control-lg" type="text" name="lastName"
+												placeholder="Last Name" />
+										</div>
 										<div class="mb-3">
 											<label class="form-label">Email</label>
 											<input class="form-control form-control-lg" type="email" name="email"
@@ -33,13 +45,15 @@
 											<input class="form-control form-control-lg" type="password" name="password"
 												placeholder="Enter your password" />
 										</div>
+                                        <div class="mb-3">
+											<label class="form-label">Facebook Ads Access Token</label>
+											<input class="form-control form-control-lg" type="text" name="fbAccessToken"
+												placeholder="Access Token"/>
+										</div>
 										<div class="text-center mt-3">
-											<button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+											<button type="submit" class="btn btn-lg btn-primary">Sign up</button>
 										</div>
 										<div id="error-message" class="text-danger"></div>
-										<div class="mt-3 text-center">
-											<a href="/sign-up" class="link-primary">Don't have an account? Sign up now!</a>
-										</div>
 									</form>
 								</div>
 							</div>
@@ -51,7 +65,7 @@
 		</div>
 	</main>
     
-	<script src="../static/js/login.js"></script>
+	<script src="../static/js/signup.js"></script>
     <script src="../static/adminkit/dist/js/app.js"></script>
 
 </body>

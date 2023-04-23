@@ -220,7 +220,7 @@ $(document).ready(function () {
                     "levelType": "account"
                 })
             }
-        )
+        );
 
         return result
     };

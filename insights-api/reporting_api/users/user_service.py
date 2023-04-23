@@ -13,7 +13,7 @@ class UserService:
         pass
 
     def validate_email(self,email):
-        path = "^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
+        path = "^[a-zA-Z0-9-_.]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
         if re.match(path,email):
             return True
         return False
@@ -91,3 +91,6 @@ class UserService:
         access_token = request.headers['x-access-token']
         decoded_token = jwt.decode(access_token, verify=False)
         return {'logout':True,'token':access_token,'decoded_token':decoded_token,'status':200}
+
+user_service = UserService()
+user_service.validate_email('fikri.cetin07@gmail.com')

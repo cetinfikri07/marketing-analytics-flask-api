@@ -35,6 +35,10 @@ def login():
         print(password)
 
         return redirect('/')
+    
+@app.route('/sign-up',methods = ['GET'])
+def signup():
+    return render_template('signup.html')
 
 @app.route('/',methods=['GET'])
 def index():

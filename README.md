@@ -26,7 +26,14 @@ Now you are all set to start using the app. In the demo account there are 2 diff
 
 ### Main Functionalities
 
-* Flexiblity on different levels as account, campaign, adset, ad 
-* Action type option to calculate conversions, cost per action and conversion rates
-* Date range option
+* Flexiblity on different levels as account, campaign, adset, ad.
+* Action type option to calculate conversions, cost per action and conversion rates.
+* Date range option.
 * Time series, distribution by country, age and gender.
+* New ad account can be inserted.
+
+If you are wondering how your ad account is performing, you can register your ad account as follows;
+* Click profile icon on the top right corner.
+* Select register account option.
+  
+
