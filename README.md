@@ -18,5 +18,6 @@ mysql -u username -p meta < meta.sql
 python insights-api/main.py
 python dashboard/main.py
 ```
-
-
+4. Visit http://localhost:5000/ you'll be redirected to the login page automatically, you can login with using example user credentials as
+* **Username:** user01@example.com
+* **Password:** user
