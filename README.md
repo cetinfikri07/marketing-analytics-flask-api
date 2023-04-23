@@ -21,3 +21,12 @@ python dashboard/main.py
 4. Visit http://localhost:5000/ you'll be redirected to the login page automatically, you can login with using example user credentials as
 * **Username:** user01@example.com
 * **Password:** user
+
+Now you are all set to start using the app. In the demo account there are 2 different ad accounts you can switch accounts from the dropdown menu and see graphs and different metrics that indicates demo account's ad account performance. 
+
+### Main Functionalities
+
+* Flexiblity on different levels as account, campaign, adset, ad 
+* Action type option to calculate conversions, cost per action and conversion rates
+* Date range option
+* Time series, distribution by country, age and gender.
