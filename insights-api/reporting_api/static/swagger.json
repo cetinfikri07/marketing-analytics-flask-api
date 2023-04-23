@@ -1,0 +1,15 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "fikri",
+    "version": "1.0.0",
+    "title": "marketing-analytics-flask-api",
+    "contact": {
+      "email": "fikri.cetin07@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  }
+}
