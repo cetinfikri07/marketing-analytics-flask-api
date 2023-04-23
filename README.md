@@ -1,1 +1,2 @@
 # Meta Marketing Analytics Flask REST API & Web Dashboard
+This project is built on top of the Meta Marketing Ad Insights API and aims to provide a REST API written in Flask Framework and a web-based visual and interactive dashboard that consumes Flask API to make it easier for digital marketing specialists and marketing data analysts to have some insights, measure and evaluate their digital marketing campaigns.   
