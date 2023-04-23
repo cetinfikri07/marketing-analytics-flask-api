@@ -5,7 +5,9 @@ This project is built on top of the Meta Marketing Ad Insights API and aims to p
 
 You'll need start two different Flask application which are located at ```dashboard``` and ```insights-api```
 
-### Clone the project
+1. **Clone the project**
 ```git clone https://github.com/cetinfikri07/marketing-analytics-flask-api.git```
+
+
 
 
