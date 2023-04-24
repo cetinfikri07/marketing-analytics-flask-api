@@ -45,9 +45,9 @@ $(document).ready(function () {
                 getOnLoadDataResponse = await getonLoadData();
                 getOnLoadDataJson = await getOnLoadDataResponse.json();
 
-                if (getOnLoadDataJson == 0){
+                if (getOnLoadDataJson == 0) {
 
-                    $('section.loading').hide();      
+                    $('section.loading').hide();
                     alert('No data available in given dates');
 
                 } else {
@@ -55,8 +55,8 @@ $(document).ready(function () {
                     firstObj = getOnLoadDataJson[0];
                     console.log(firstObj);
                     var accountCurrency = firstObj.account_currency
-                    currencyIconElement =  currencyIcon(accountCurrency);
-            
+                    currencyIconElement = currencyIcon(accountCurrency);
+
                     //set currency icon
                     $('#currencyIcon').empty();
                     $('#currencyIcon').append(currencyIconElement);
@@ -76,14 +76,14 @@ $(document).ready(function () {
                     $('#cr').text('%' + firstObj['cr_' + actionsSelect.val()]);
                     $('#ctr').text('%' + firstObj.ctr);
 
-                    drawLineChart(firstObj,timeSeriesSelect.val());
+                    drawLineChart(firstObj, timeSeriesSelect.val());
 
                     // draw map chart
                     getCountryResponse = await getCountryData();
                     getCountryJson = await getCountryResponse.json();
                     firstObj = getCountryJson[0].series;
 
-                    drawRegionsMap(firstObj,countrySelect.val());
+                    drawRegionsMap(firstObj, countrySelect.val());
 
                     // draw age gender distribution
                     getAgeGenderResponse = await getAgeGenderData();
@@ -91,7 +91,7 @@ $(document).ready(function () {
 
                     firstObj = getAgeGenderDataJson[0].pivot_table;
 
-                    drawMultSeries(firstObj,ageGenderSelect.val());
+                    drawMultSeries(firstObj, ageGenderSelect.val());
 
                     $('section.loading').hide();
                 }
@@ -99,12 +99,12 @@ $(document).ready(function () {
         )
     });
 
-    function currencyIcon(currency){
-        if(currency == 'TRY'){
+    function currencyIcon(currency) {
+        if (currency == 'TRY') {
             var iconElement = `<i class="fa-solid fa-turkish-lira-sign"></i>`
         } else if (currency == 'USD') {
             var iconElement = `<i class="fa-solid fa-dollar-sign"></i>`
-        } else if (currency == 'EUR'){
+        } else if (currency == 'EUR') {
             var iconElement = `<i class="fa-solid fa-euro-sign"></i>`
         } else {
             var iconElement = `<i class="fa-solid fa-money-bill"></i>`
@@ -113,10 +113,10 @@ $(document).ready(function () {
         return iconElement
     }
 
-    function drawLineChart(data,series_field = 'total_spend') {
+    function drawLineChart(data, series_field = 'total_spend') {
         var dataTable = new google.visualization.DataTable();
         var words = series_field.split('_');
-        var capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1)); 
+        var capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
         var fieldText = capitalizedWords.join(' ');
 
         dataTable.addColumn('datetime', 'Date');
@@ -135,7 +135,7 @@ $(document).ready(function () {
             }
         };
 
-        if ($('#line_chart').is(":hidden")){
+        if ($('#line_chart').is(":hidden")) {
             $('#line_chart').show();
         };
 
@@ -143,20 +143,20 @@ $(document).ready(function () {
         chart.draw(dataTable, options);
     };
 
-    function drawRegionsMap(data,label){
-        var result = data.reduce(function(accumulator, currentValue){
+    function drawRegionsMap(data, label) {
+        var result = data.reduce(function (accumulator, currentValue) {
             if (typeof accumulator[currentValue.country] === 'undefined') {
                 accumulator[currentValue.country] = 0;
-              }
+            }
             accumulator[currentValue.country] += currentValue[countrySelect.val()];
             return accumulator;
-        },{});
+        }, {});
 
         result = Object.entries(result).map(([key, value]) => [key, value]);
 
         var dataTable = new google.visualization.DataTable();
-        dataTable.addColumn('string','Country');
-        dataTable.addColumn('number',label);
+        dataTable.addColumn('string', 'Country');
+        dataTable.addColumn('number', label);
         dataTable.addRows(result);
 
         var options = {};
@@ -167,31 +167,31 @@ $(document).ready(function () {
 
     };
 
-    
-    function drawMultSeries(pivot,field) {
-        if(pivot.length != 1){
+
+    function drawMultSeries(pivot, field) {
+        if (pivot.length != 1) {
             var data = google.visualization.arrayToDataTable(pivot);
 
             var words = field.split('_');
-            var capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1)); 
+            var capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
             var fieldText = capitalizedWords.join(' ');
-    
+
             var options = {
-            title: fieldText + ' by age and gender',
-            chartArea: {width: '60%'},
-            hAxis: {
-                title: fieldText,
-                minValue: 0.001
-            },
-            vAxis: {
-                title: 'Age'
-            }
+                title: fieldText + ' by age and gender',
+                chartArea: { width: '60%' },
+                hAxis: {
+                    title: fieldText,
+                    minValue: 0.001
+                },
+                vAxis: {
+                    title: 'Age'
+                }
             };
-    
+
             var chart = new google.visualization.BarChart(document.getElementById('age_gender_div'));
             chart.draw(data, options);
         } else {
-        var data = [
+            var data = [
                 ['total_spend', 'male', 'female'],
                 ['18-24', 0, 0],
                 ['25-34', 0, 0],
@@ -199,11 +199,11 @@ $(document).ready(function () {
                 ['55-64', 0, 0]
             ]
 
-        
-        data = google.visualization.arrayToDataTable(data);
 
-        var chart = new google.visualization.BarChart(document.getElementById('age_gender_div'));
-        chart.draw(data, options);    
+            data = google.visualization.arrayToDataTable(data);
+
+            var chart = new google.visualization.BarChart(document.getElementById('age_gender_div'));
+            chart.draw(data, options);
         };
 
     };
@@ -240,7 +240,7 @@ $(document).ready(function () {
             "level": levelSelect.val()
         };
 
-        var result = fetch('http://127.0.0.1:5555/meta/report',{
+        var result = fetch('http://127.0.0.1:5555/meta/report', {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + token,
@@ -254,7 +254,7 @@ $(document).ready(function () {
 
     };
 
-    function getCountryData (){
+    function getCountryData() {
         dateStart = $('input[name="daterange"]').val().split(' - ')[0];
         dateStop = $('input[name="daterange"]').val().split(' - ')[1];
 
@@ -267,7 +267,7 @@ $(document).ready(function () {
             "level": levelSelect.val()
         };
 
-        var result = fetch('http://127.0.0.1:5555/meta/report',{
+        var result = fetch('http://127.0.0.1:5555/meta/report', {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + token,
@@ -281,7 +281,7 @@ $(document).ready(function () {
 
     };
 
-    function getAgeGenderData(){
+    function getAgeGenderData() {
         dateStart = $('input[name="daterange"]').val().split(' - ')[0];
         dateStop = $('input[name="daterange"]').val().split(' - ')[1];
 
@@ -290,12 +290,12 @@ $(document).ready(function () {
             "date_stop": dateStop,
             "account_id": accountSelect.val(),
             "series": [ageGenderSelect.val()],
-            "breakdowns": ['age','gender'],
-            "pivot":true,
+            "breakdowns": ['age', 'gender'],
+            "pivot": true,
             "level": levelSelect.val()
         };
 
-        var result = fetch('http://127.0.0.1:5555/meta/report',{
+        var result = fetch('http://127.0.0.1:5555/meta/report', {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + token,
@@ -311,69 +311,83 @@ $(document).ready(function () {
 
 
     async function onLoadInsights() {
-        $('section.loading').show();
+        try {
+            $('section.loading').show();
 
-        await google.charts.load('current', { 'packages': ['corechart', 'line','geochart']});
+            await google.charts.load('current', { 'packages': ['corechart', 'line', 'geochart'] });
 
-        //get accounts
-        getAccountResponse = await getAccounts();
-        getAccountJson = await getAccountResponse.json();
+            //get accounts
+            getAccountResponse = await getAccounts();
+            getAccountJson = await getAccountResponse.json();
 
-        getAccountJson.forEach(element => {
-            var option = $('<option>');
-            let levelId = Object.values(element)[0];
-            let levelName = Object.values(element)[1];
-            option.val(levelId);
-            option.text(levelName);
+            getAccountJson.forEach(element => {
+                var option = $('<option>');
+                let levelId = Object.values(element)[0];
+                let levelName = Object.values(element)[1];
+                option.val(levelId);
+                option.text(levelName);
 
-            $('#account_id').append(option);
-        });
+                $('#account_id').append(option);
+            });
 
-        //get insights
-        getOnLoadDataResponse = await getonLoadData();
-        getOnLoadDataJson = await getOnLoadDataResponse.json();
+            //get insights
+            getOnLoadDataResponse = await getonLoadData();
+            getOnLoadDataJson = await getOnLoadDataResponse.json();
 
-        //get first object and write to document
-        firstObj = getOnLoadDataJson[0];
-        var accountCurrency = firstObj.account_currency
-        currencyIconElement =  currencyIcon(accountCurrency);
+            //get first object and write to document
+            firstObj = getOnLoadDataJson[0];
+            var accountCurrency = firstObj.account_currency
+            currencyIconElement = currencyIcon(accountCurrency);
 
-        //set currency icon 
-        $('#spendingsCurrencyIcon').append(currencyIconElement);
-        $('#cpcCurrencyAccount').append(currencyIconElement);
-        $('#cpaCurrencyIcon').append(currencyIconElement);
+            //set currency icon 
+            $('#spendingsCurrencyIcon').append(currencyIconElement);
+            $('#cpcCurrencyAccount').append(currencyIconElement);
+            $('#cpaCurrencyIcon').append(currencyIconElement);
 
-        $('#impressions').text(firstObj.impressions_sum);
-        $('#spendings').text(firstObj.total_spend_sum);
-        $('#clicks').text(firstObj.clicks_sum);
-        $('#conversions').text(firstObj[actionsSelect.val() + '_sum']);
-        $('#cpc').text(firstObj.cpc);
-        $('#cpa').text(firstObj['cpa_' + actionsSelect.val()]);
-        $('#cr').text('%' + firstObj['cr_' + actionsSelect.val()]);
-        $('#ctr').text('%' + firstObj.ctr);
+            $('#impressions').text(firstObj.impressions_sum);
+            $('#spendings').text(firstObj.total_spend_sum);
+            $('#clicks').text(firstObj.clicks_sum);
+            $('#conversions').text(firstObj[actionsSelect.val() + '_sum']);
+            $('#cpc').text(firstObj.cpc);
+            $('#cpa').text(firstObj['cpa_' + actionsSelect.val()]);
+            $('#cr').text('%' + firstObj['cr_' + actionsSelect.val()]);
+            $('#ctr').text('%' + firstObj.ctr);
 
-        drawLineChart(firstObj,timeSeriesSelect.val());
+            drawLineChart(firstObj, timeSeriesSelect.val());
 
-        // draw map chart
-        getCountryResponse = await getCountryData();
-        getCountryJson = await getCountryResponse.json();
-        firstObj = getCountryJson[0].series;
+            // draw map chart
+            getCountryResponse = await getCountryData();
+            getCountryJson = await getCountryResponse.json();
+            firstObj = getCountryJson[0].series;
 
-        drawRegionsMap(firstObj,countrySelect.val());
+            drawRegionsMap(firstObj, countrySelect.val());
 
-        // draw age gender distribution
-        getAgeGenderResponse = await getAgeGenderData();
-        getAgeGenderDataJson = await getAgeGenderResponse.json(); 
+            // draw age gender distribution
+            getAgeGenderResponse = await getAgeGenderData();
+            getAgeGenderDataJson = await getAgeGenderResponse.json();
 
-        firstObj = getAgeGenderDataJson[0].pivot_table;
+            firstObj = getAgeGenderDataJson[0].pivot_table;
 
-        drawMultSeries(firstObj,ageGenderSelect.val());
+            drawMultSeries(firstObj, ageGenderSelect.val());
 
-        $('section.loading').hide();
-
+            $('section.loading').hide();
+        } catch (error) {
+            $('section.loading').hide();
+            const newRow = `
+            <div class="row">
+                <div class="col-6">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <span>To see your metrics, please register for an ad account.</span> 
+                        <button type="button" class="btn btn-light" onclick="window.location.href='/settings'">Register</button>
+                    </div>
+                </div>
+            </div>
+            `
+            $('.container-fluid.p-0').prepend(newRow);
+        };
     };
 
-    accountSelect.change(async function() {
+    accountSelect.change(async function () {
         $('section.loading').show();
 
         //get insights
@@ -383,7 +397,7 @@ $(document).ready(function () {
         //get first object and write to document
         firstObj = getOnLoadDataJson[0];
         var accountCurrency = firstObj.account_currency
-        currencyIconElement =  currencyIcon(accountCurrency);
+        currencyIconElement = currencyIcon(accountCurrency);
 
         //set currency icon
         $('#spendingsCurrencyIcon').empty();
@@ -405,7 +419,7 @@ $(document).ready(function () {
         $('#ctr').text('%' + firstObj.ctr);
 
         // draw time series chart
-        drawLineChart(firstObj,timeSeriesSelect.val());
+        drawLineChart(firstObj, timeSeriesSelect.val());
 
         // get country data
         getCountryResponse = await getCountryData();
@@ -413,20 +427,20 @@ $(document).ready(function () {
         firstObj = getCountryJson[0].series;
 
         //draw map chart
-        drawRegionsMap(firstObj,countrySelect.val());
+        drawRegionsMap(firstObj, countrySelect.val());
 
         // draw age gender distribution
         getAgeGenderResponse = await getAgeGenderData();
-        getAgeGenderDataJson = await getAgeGenderResponse.json(); 
+        getAgeGenderDataJson = await getAgeGenderResponse.json();
 
         firstObj = getAgeGenderDataJson[0].pivot_table;
 
-        drawMultSeries(firstObj,ageGenderSelect.val());
+        drawMultSeries(firstObj, ageGenderSelect.val());
 
         $('section.loading').hide();
     });
 
-    levelSelect.change(async function(){
+    levelSelect.change(async function () {
         $('section.loading').show();
         $('#select-level-row').remove();
 
@@ -435,7 +449,7 @@ $(document).ready(function () {
         getOnLoadDataJson = await getOnLoadDataResponse.json();
 
         var level = levelSelect.val();
-        if (level != 'account'){
+        if (level != 'account') {
             const newRow = `
             <div class="row" id= 'select-level-row'>
                 <div class="col-6">
@@ -465,7 +479,7 @@ $(document).ready(function () {
 
         firstObj = getOnLoadDataJson[0];
         var accountCurrency = firstObj.account_currency
-        currencyIconElement =  currencyIcon(accountCurrency);
+        currencyIconElement = currencyIcon(accountCurrency);
 
         //set currency icon
         $('#spendingsCurrencyIcon').empty();
@@ -485,28 +499,28 @@ $(document).ready(function () {
         $('#cpa').text(firstObj['cpa_' + actionsSelect.val()]);
         $('#cr').text('%' + firstObj['cr_' + actionsSelect.val()]);
         $('#ctr').text('%' + firstObj.ctr);
-        drawLineChart(firstObj,timeSeriesSelect.val());
+        drawLineChart(firstObj, timeSeriesSelect.val());
 
         // draw map chart
         getCountryResponse = await getCountryData();
         getCountryJson = await getCountryResponse.json();
         firstObj = getCountryJson[0].series;
 
-        drawRegionsMap(firstObj,countrySelect.val());
+        drawRegionsMap(firstObj, countrySelect.val());
 
         // draw age gender distribution
         getAgeGenderResponse = await getAgeGenderData();
-        getAgeGenderDataJson = await getAgeGenderResponse.json(); 
-        
+        getAgeGenderDataJson = await getAgeGenderResponse.json();
+
         firstObj = getAgeGenderDataJson[0].pivot_table;
-        
-        drawMultSeries(firstObj,ageGenderSelect.val());
+
+        drawMultSeries(firstObj, ageGenderSelect.val());
 
         $('section.loading').hide();
 
     });
 
-    $('body').on('change','#select-level', async function(e) {
+    $('body').on('change', '#select-level', async function (e) {
         $('section.loading').show();
         var level = levelSelect.val();
         var key = level + '_id';
@@ -519,7 +533,7 @@ $(document).ready(function () {
         var foundOnLoadDataObject = getOnLoadDataJson.find(item => item[key] === id);
 
         var accountCurrency = foundOnLoadDataObject.account_currency
-        currencyIconElement =  currencyIcon(accountCurrency);
+        currencyIconElement = currencyIcon(accountCurrency);
 
         //set currency icon
         $('#spendingsCurrencyIcon').empty();
@@ -530,7 +544,7 @@ $(document).ready(function () {
 
         $('#cpaCurrencyIcon').empty();
         $('#cpaCurrencyIcon').append(currencyIconElement);
-        
+
         $('#impressions').text(foundOnLoadDataObject.impressions_sum);
         $('#spendings').text(foundOnLoadDataObject.total_spend_sum);
         $('#clicks').text(foundOnLoadDataObject.clicks_sum);
@@ -540,27 +554,27 @@ $(document).ready(function () {
         $('#cr').text('%' + foundOnLoadDataObject['cr_' + actionsSelect.val()]);
         $('#ctr').text('%' + foundOnLoadDataObject.ctr);
 
-        drawLineChart(foundOnLoadDataObject,timeSeriesSelect.val());
+        drawLineChart(foundOnLoadDataObject, timeSeriesSelect.val());
 
         // get counry data
         getCountryResponse = await getCountryData();
         getCountryJson = await getCountryResponse.json();
         var foundCountryObject = getCountryJson.find(item => item[key] === id).series;
 
-        drawRegionsMap(foundCountryObject,countrySelect.val());
+        drawRegionsMap(foundCountryObject, countrySelect.val());
 
         // draw age gender distribution
         getAgeGenderResponse = await getAgeGenderData();
-        getAgeGenderDataJson = await getAgeGenderResponse.json(); 
+        getAgeGenderDataJson = await getAgeGenderResponse.json();
         var foundAgeGenderObject = getAgeGenderDataJson.find(item => item[key] === id).pivot_table;
 
-        drawMultSeries(foundAgeGenderObject,ageGenderSelect.val());
+        drawMultSeries(foundAgeGenderObject, ageGenderSelect.val());
 
 
         $('section.loading').hide();
     });
 
-    actionsSelect.change(async function(){
+    actionsSelect.change(async function () {
         $('section.loading').show();
 
         //get insights
@@ -570,7 +584,7 @@ $(document).ready(function () {
         //get first object and write to document
         firstObj = getOnLoadDataJson[0];
         var accountCurrency = firstObj.account_currency
-        currencyIconElement =  currencyIcon(accountCurrency);
+        currencyIconElement = currencyIcon(accountCurrency);
 
         //set currency icon
         $('#spendingsCurrencyIcon').empty();
@@ -582,7 +596,7 @@ $(document).ready(function () {
         $('#cpaCurrencyIcon').empty();
         $('#cpaCurrencyIcon').append(currencyIconElement);
 
-        
+
 
         $('#impressions').text(firstObj.impressions_sum);
         $('#spendings').text(firstObj.total_spend_sum);
@@ -598,7 +612,7 @@ $(document).ready(function () {
 
     });
 
-    timeSeriesSelect.change(async function(){
+    timeSeriesSelect.change(async function () {
         $('section.loading').show();
         var level = levelSelect.val();
 
@@ -606,39 +620,39 @@ $(document).ready(function () {
         getOnLoadDataResponse = await getonLoadData();
         getOnLoadDataJson = await getOnLoadDataResponse.json();
 
-        if($('#select-level').length){
+        if ($('#select-level').length) {
             let key = level + '_id';
             let id = $('#select-level').val();
-            
+
             var foundTimesSeriesObject = getOnLoadDataJson.find(item => item[key] === id);
-            drawLineChart(foundTimesSeriesObject,timeSeriesSelect.val());
+            drawLineChart(foundTimesSeriesObject, timeSeriesSelect.val());
 
         } else {
             var firstObj = getOnLoadDataJson[0];
-            drawLineChart(firstObj,timeSeriesSelect.val());
+            drawLineChart(firstObj, timeSeriesSelect.val());
         };
 
         $('section.loading').hide();
 
     });
 
-    countrySelect.change(async function(){
+    countrySelect.change(async function () {
         $('section.loading').show();
         var level = levelSelect.val();
 
         getCountryResponse = await getCountryData();
         getCountryJson = await getCountryResponse.json();
 
-        if($('#select-level').length){
+        if ($('#select-level').length) {
             let key = level + '_id';
             let id = $('#select-level').val();
-            
+
             var foundCountryObject = getCountryJson.find(item => item[key] === id).series;
-            drawRegionsMap(foundCountryObject,countrySelect.val());
+            drawRegionsMap(foundCountryObject, countrySelect.val());
 
         } else {
             var firstObj = getCountryJson[0].series;
-            drawRegionsMap(firstObj,countrySelect.val());
+            drawRegionsMap(firstObj, countrySelect.val());
         };
 
 
@@ -646,22 +660,22 @@ $(document).ready(function () {
 
     });
 
-    ageGenderSelect.change(async function(){
+    ageGenderSelect.change(async function () {
         $('section.loading').show();
         var level = levelSelect.val();
         getAgeGenderDataResponse = await getAgeGenderData();
         getAgeGenderDataJson = await getAgeGenderDataResponse.json();
 
-        if($('#select-level').length){
+        if ($('#select-level').length) {
             let key = level + '_id';
             let id = $('#select-level').val();
-            
+
             var foundAgeGenderObject = getAgeGenderDataJson.find(item => item[key] === id).pivot_table;
-            drawMultSeries(foundAgeGenderObject,ageGenderSelect.val());
+            drawMultSeries(foundAgeGenderObject, ageGenderSelect.val());
 
         } else {
             var firstObj = getAgeGenderDataJson[0].pivot_table;
-            drawMultSeries(firstObj,ageGenderSelect.val());
+            drawMultSeries(firstObj, ageGenderSelect.val());
         };
 
         $('section.loading').hide();
@@ -669,12 +683,10 @@ $(document).ready(function () {
     });
 
 
-    $('#logout').click(function(){
+    $('#logout').click(function () {
         localStorage.removeItem('token');
         window.location.href = 'http://localhost:5000/login';
     });
 
-
     onLoadInsights();
-
 });

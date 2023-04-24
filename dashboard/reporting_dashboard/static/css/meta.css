@@ -40,3 +40,7 @@ section.loading img {
     margin: auto;
     transform: translateY(-50%);
 }
+
+div.alert span {
+    padding-right: 10px;
+}
