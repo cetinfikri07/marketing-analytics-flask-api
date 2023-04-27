@@ -33,6 +33,8 @@ Now you are all set to start using the app. In the demo account there are 2 diff
 * New ad account can be inserted.
 
 If you are wondering how your ad account is performing, you can register your ad account as follows;
+* Go to https://developers.facebook.com/apps, create new app and add Marketing API to your app.
+* In the app.yaml file replace APP_ID and APP_SECRET with your credentials.
 * Click profile icon and log out from demo account.
 * Create a new account with using your own credentials and log into your account.
 * After you logged in you'll see a warning message that says you should register and account.
